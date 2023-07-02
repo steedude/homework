@@ -26,7 +26,7 @@ Body
 }
 ```
 
-3. 新增書本
+3. 修改書本
 ```
 PUT /books/{title}
 Body
