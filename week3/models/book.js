@@ -2,20 +2,16 @@
 const { Model } = require('sequelize')
 module.exports = (sequelize, DataTypes) => {
   class Book extends Model {
-    /**
-     * Helper method for defining associations.
-     * This method is not a part of Sequelize lifecycle.
-     * The `models/index` file will call this method automatically.
-     */
     static associate(models) {
-      // define association here
+      this.belongsTo(models.Author, {
+        foreignKey: 'authorId',
+      })
     }
   }
   Book.init(
     {
       id: {
-        // 欄位名稱
-        type: DataTypes.INTEGER, //  資料型態
+        type: DataTypes.INTEGER,
         autoIncrement: true,
         primaryKey: true,
       },
@@ -46,9 +42,13 @@ module.exports = (sequelize, DataTypes) => {
       title: {
         type: DataTypes.STRING,
         allowNull: true,
-        validate: { len: { args: [2, 10], msg: '文字長度不符合規定' } },
+        validate: { len: { args: [2, 50], msg: '文字長度不符合規定' } },
       },
       year: {
+        type: DataTypes.INTEGER,
+        allowNull: true,
+      },
+      authorId: {
         type: DataTypes.INTEGER,
         allowNull: true,
       },
@@ -56,6 +56,8 @@ module.exports = (sequelize, DataTypes) => {
     {
       sequelize,
       modelName: 'Book',
+      tableName: 'Books',
+      // underscored: true,
     }
   )
   return Book
