@@ -7,7 +7,7 @@ const Redis = require('ioredis')
 const Author = db.Author
 const redis = new Redis({
   port: 6379, // Redis port
-  host: '127.0.0.1', // Redis host
+  host: '172.17.0.2', // Redis host
   db: 0, // Defaults to 0
 })
 
